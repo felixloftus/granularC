@@ -41,10 +41,10 @@ public:
 	float volume;
     
     //////////// ofxMaxim ////////////
-    maxiPitchStretch<grainPlayerWin> *ps;
+    maxiPitchStretch<grainPlayerWin> *ps, *ps2;
     maxiMix mymix;
     maxiSample samp;
-    double wave;
+    double wave, wave2, wave3;
     double outputs[2];
     double windowAmp;
     
@@ -64,4 +64,5 @@ public:
     //Drawing
     int curXpos, curYpos;
     int prevXpos, prevYpos;
+    
 };

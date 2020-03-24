@@ -25,9 +25,16 @@ class ofApp : public ofBaseApp{
         ofSoundStream soundStream;
         ofSoundMixer mixer;
     
-        GrainPlayer grainPlayer;
+        GrainPlayer I;
+        GrainPlayer andI;
+        GrainPlayer andIandI;
+        GrainPlayer andIandIandI;
         
         //GUI
         ofxUICanvas *gui;
         void guiEvent(ofxUIEventArgs &e);
+    
+        // global Variables
+        double gloSpeed;
+        vector<GrainPlayer> chunky;
 };

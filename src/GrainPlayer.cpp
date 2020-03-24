@@ -44,6 +44,7 @@ void GrainPlayer::setup(){
     // ps is a pitch strecth object
     samp.load(ofToDataPath("400Frames(60fps).wav"));
     ps = new maxiPitchStretch<grainPlayerWin>(&samp);
+    ps2 = new maxiPitchStretch<grainPlayerWin>(&samp);
     ofxMaxiSettings::setup(sampleRate, 2, bufferSize);
     
 }
@@ -55,6 +56,7 @@ void GrainPlayer::updatePlayHead(){
             // length is the defined length of the window i think
             // in this call one can change the pitch stretch amount
             ps->setPosition(ofMap(samp.recordPosition,0,LENGTH,0.0,1.0));
+            ps2->setPosition(ofMap(samp.recordPosition,0,LENGTH,0.0,1.0));
         }
         bUpdatePlayheadEvent = false;
     } else {
@@ -86,8 +88,10 @@ void GrainPlayer::audioRequested (float *output, int numFrames, int nChannels)
         if(bSetPosition == true){
             ps->setPosition(playHead);
         }
-        wave = ps->play(pitch, speed, grainSize, (int)overlaps); 
-        mymix.stereo(wave, outputs, 0.5);
+        wave = ps->play(pitch, speed, grainSize, (int)overlaps);
+        wave2 = ps->play(pitch+0.3, speed, grainSize, (int)overlaps);
+        wave3 = wave + wave2 *0.5;
+        mymix.stereo(wave3, outputs, 0.5);
         output[i*nChannels    ] = outputs[0] * volume;
         output[i*nChannels + 1] = outputs[1] * volume;
     }
